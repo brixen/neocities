@@ -91,12 +91,13 @@ Sequel::Model.plugin :force_encoding, 'UTF-8'
 Sequel::Model.plugin :timestamps, create: :created_at, update: :updated_at
 Sequel::Model.plugin :defaults_setter
 Sequel.default_timezone = 'UTC'
-Sequel::Migrator.apply DB, './migrations'
 
-Stripe.api_key = $config['stripe_api_key']
+Sequel::Migrator.apply DB, './migrations'
 
 Dir.glob('models/*.rb').each {|m| require File.join(DIR_ROOT, "#{m}") }
 Dir.glob('workers/*.rb').each {|w| require File.join(DIR_ROOT, "/#{w}") }
+
+Stripe.api_key = $config['stripe_api_key']
 
 DB.loggers << Logger.new(STDOUT) if ENV['RACK_ENV'] == 'development'
 

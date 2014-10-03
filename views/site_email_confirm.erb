@@ -1,0 +1,17 @@
+<div class="header-Outro">
+  <div class="row content single-Col">
+  <h1>Confirm Email</h1>
+  </div>
+</div>
+
+<div class="content single-Col misc-page">
+	<h3></h3>
+  <p>In order to get started, we first need to verify your email. Enter the confirmation token that was emailed to you. If you don't see it in your inbox after a few minutes, check your spam folder. If you don't see it after 5-10 minutes, <a href="">Click here</a></p>
+  <article>
+    <form method="POST" action="/site/<%= params[:username] %>/confirm_email">
+    	<p>Email confirmation token:</p>
+    	<p><input name="token" type="text"></p>
+    	<p><input class="btn-Action" value="Send"></p>
+    </form>
+  </article>
+</div>

@@ -147,6 +147,8 @@ class Site < Sequel::Model
 
   one_to_many :site_changes
 
+  many_to_one :account
+
   class << self
     def valid_login?(username, plaintext)
       site = self[username: username]

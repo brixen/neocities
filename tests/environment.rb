@@ -38,7 +38,13 @@ MiniTest::Reporters.use! MiniTest::Reporters::SpecReporter.new
 # Bootstrap the database
 Sequel.extension :migration
 
-Sequel::Migrator.apply DB, './migrations', 0
+class Sequel::Database
+  def drop_tables!
+    tables.each {|t| DB.drop_table(t, cascade: true) }
+  end
+end
+
+DB.drop_tables!
 Sequel::Migrator.apply DB, './migrations'
 
 Fabrication.configure do |config|
